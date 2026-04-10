@@ -7,6 +7,15 @@ import { useBoardStore, LeadCard } from "@/store/use-board-store";
 import { useI18nStore } from "@/store/use-i18n-store";
 import { supabase } from "@/lib/db/supabase-client";
 
+interface Activity {
+  id: string;
+  lead_id: string;
+  user_id: string | null;
+  type: 'comment' | 'stage_change' | 'task_created';
+  content: string;
+  created_at: string;
+}
+
 export function LeadSlideover() {
   const { selectedLeadId, setSelectedLead, columns, updateLeadCustomFields } = useBoardStore();
   const { t } = useI18nStore();
@@ -20,7 +29,7 @@ export function LeadSlideover() {
 
   // Commentary State
   const [note, setNote] = useState("");
-  const [activities, setActivities] = useState<Record<string, unknown>[]>([]);
+  const [activities, setActivities] = useState<Activity[]>([]);
   
   // Generation State
   const [isGenerating, setIsGenerating] = useState(false);
