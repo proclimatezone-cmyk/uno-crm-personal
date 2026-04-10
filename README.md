@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# UNO CRM - Phase 2 Implementation
 
-## Getting Started
+A modern, high-performance CRM system built with **Next.js 16**, **Supabase**, and **Framer Motion**. Designed for elegance, efficiency, and scale.
 
-First, run the development server:
+## ✨ Core Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+*   **Premium Kanban Board:** Smooth, interactive drag-and-drop experience powered by `@hello-pangea/dnd`.
+*   **Intelligent Automation:** Integrated webhooks for automated proposal generation via Make.com.
+*   **Multilingual Support:** Full i18n support for English, Russian, and Uzbek.
+*   **Real-time Sync:** Powered by Supabase for instant updates across the board.
+*   **Modern UI:** Sleek glassmorphism effects, serif typography, and accessible dark mode.
+*   **Secured Workflow:** SSR-protected routes and role-based access control.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+*   **Frontend:** Next.js 16 (App Router), Tailwind CSS
+*   **Animations:** Framer Motion (fast 0.2s transitions)
+*   **State Management:** Zustand
+*   **Backend/Auth:** Supabase (Postgres, Auth, Edge Functions)
+*   **Icons:** Lucide React
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## ⚙️ Setup & Installation
 
-## Learn More
+1. **Clone & Install:**
+   ```bash
+   npm install
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+2. **Environment Variables:**
+   Create a `.env.local` file with the following:
+   ```env
+   NEXT_PUBLIC_SUPABASE_URL=your_supabase_url
+   NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+   MAKE_WEBHOOK_URL=your_make_webhook_url
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+3. **Development Mode:**
+   ```bash
+   npm run dev
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+4. **Production Build:**
+   ```bash
+   npm run build
+   ```
 
-## Deploy on Vercel
+## 📈 Quality Assurance
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project has undergone comprehensive QA testing, including:
+- [x] Full TypeScript strict type checking.
+- [x] Production build verification.
+- [x] Linting and code style enforcement.
+- [x] Middleware resilience testing.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+---
+Built with ❤️ for **UNO CRM**.
