@@ -32,6 +32,8 @@ export async function middleware(request: NextRequest) {
     }
   )
 
+  // AUTH BYPASSED FOR PERSONAL CRM MODE
+  /*
   const {
     data: { user },
   } = await supabase.auth.getUser()
@@ -49,6 +51,7 @@ export async function middleware(request: NextRequest) {
     url.pathname = '/leads' // Main dashboard for this app
     return NextResponse.redirect(url)
   }
+  */
 
   return supabaseResponse
 }

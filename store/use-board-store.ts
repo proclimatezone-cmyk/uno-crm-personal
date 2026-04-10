@@ -63,6 +63,43 @@ export const useBoardStore = create<BoardState>((set, get) => ({
 
   fetchBoard: async () => {
     set({ isLoading: true, error: null });
+
+    // --- MOCK DATA FALLBACK FOR QA/DEMO ---
+    const isPlaceholder = !process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL.includes('placeholder');
+    
+    if (isPlaceholder) {
+       console.warn("Board: Running in Demo Mode");
+       const mockColumns: BoardColumn[] = [
+         {
+           id: 'stage-1',
+           labelKey: 'board.stages.initial',
+           color: 'stone-400',
+           cards: [
+             { id: 'lead-1', title: 'Внедрение AI-ботов', price: 12000, contact: { id: 'c1', name: 'Алексей Иванов', phone: '+7 900 123-45-67' }, createdAt: new Date().toISOString(), boardPosition: 0, tags: [{ label: 'board.tags.organic', color: 'primary' }], closingProbability: 40 },
+             { id: 'lead-2', title: 'Разработка лендинга', price: 5000, contact: { id: 'c2', name: 'Мария Петрова', phone: null }, createdAt: new Date().toISOString(), boardPosition: 1, tags: [{ label: 'board.tags.referral', color: 'tertiary' }] }
+           ]
+         },
+         {
+           id: 'stage-2',
+           labelKey: 'board.stages.qualification',
+           color: 'amber-400',
+           cards: [
+             { id: 'lead-3', title: 'SEO Оптимизация', price: 8500, contact: { id: 'c3', name: 'ТехноСфера', phone: '+7 999 000-00-01' }, createdAt: new Date().toISOString(), boardPosition: 0, tags: [{ label: 'board.tags.highValue', color: 'primary' }], closingProbability: 65, ownerAvatar: 'https://i.pravatar.cc/150?u=tech' }
+           ]
+         },
+         {
+           id: 'stage-3',
+           labelKey: 'board.stages.proposal',
+           color: 'emerald-400',
+           cards: [
+             { id: 'lead-4', title: 'Корпоративный портал', price: 45000, contact: { id: 'c4', name: 'ГазПромСбыт', phone: null }, createdAt: new Date().toISOString(), boardPosition: 0, tags: [{ label: 'board.tags.closingSoon', color: 'primary' }], closingProbability: 90 }
+           ]
+         }
+       ];
+       set({ columns: mockColumns, isLoading: false });
+       return;
+    }
+
     try {
       // 1. Fetch Funnel Stages
       const { data: stagesData, error: stagesError } = await supabase
@@ -79,9 +116,7 @@ export const useBoardStore = create<BoardState>((set, get) => ({
 
       if (leadsError) throw leadsError;
 
-      // Ensure data exists before mapping
       if (!stagesData || stagesData.length === 0) {
-         // Fallback if DB is empty - just return empty columns or mock. Currently returning empty state.
          set({ columns: [], isLoading: false });
          return;
       }

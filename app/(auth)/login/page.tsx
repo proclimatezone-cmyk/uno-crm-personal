@@ -17,16 +17,37 @@ export default function LoginPage() {
     setLoading(true);
     setError("");
 
-    const { error: authError } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
+    try {
+      // Demo mode bypass if Supabase is not configured yet
+      if (!process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL.includes('placeholder')) {
+        console.warn("Project is running in Demo Mode (No Supabase URL provided)");
+        // Artificial delay for realism
+        await new Promise(resolve => setTimeout(resolve, 800));
+        router.push("/leads");
+        return;
+      }
 
-    if (authError) {
-      setError(authError.message);
-      setLoading(false);
-    } else {
-      router.push("/leads");
+      const { error: authError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (authError) {
+        setError(authError.message);
+        setLoading(false);
+      } else {
+        router.push("/leads");
+      }
+    } catch (err: unknown) {
+      console.error("Login crash:", err);
+      // Fallback for network errors (like placeholder URL failure)
+      if (process.env.NODE_ENV === 'development') {
+        setError("Network error. Enabling Demo Mode fallback...");
+        setTimeout(() => router.push("/leads"), 1500);
+      } else {
+        setError("Сетевая ошибка при подключении к серверу авторизации.");
+        setLoading(false);
+      }
     }
   };
 
