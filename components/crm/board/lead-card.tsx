@@ -27,7 +27,7 @@ export const LeadCard = memo(({ card, index }: LeadCardProps) => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2 }}
           ref={provided.innerRef}
-          {...provided.draggableProps}
+          {...(provided.draggableProps as any)}
           {...provided.dragHandleProps}
           className={`bg-white dark:bg-stone-900 border ${
             snapshot.isDragging 
