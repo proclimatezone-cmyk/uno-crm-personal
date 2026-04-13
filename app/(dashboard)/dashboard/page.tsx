@@ -18,7 +18,7 @@ export default function DashboardPage() {
       <div className="max-w-[1600px] mx-auto">
         <header className="mb-8">
           <h1 className="text-4xl font-serif text-stone-900 dark:text-stone-50">{t("sidebar.dashboard")}</h1>
-          <p className="text-stone-500 dark:text-stone-400 mt-1">Sytem Overview & Performance Metrics</p>
+          <p className="text-stone-500 dark:text-stone-400 mt-1">System Overview & Performance Metrics</p>
         </header>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

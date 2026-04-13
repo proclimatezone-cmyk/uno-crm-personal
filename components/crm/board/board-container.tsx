@@ -7,11 +7,13 @@ import { useBoardStore } from "@/store/use-board-store";
 import { BoardColumn } from "./board-column";
 import { useI18nStore } from "@/store/use-i18n-store";
 import { LeadSlideover } from "@/components/crm/leads/lead-slideover";
+import { AddLeadModal } from "./add-lead-modal";
 
 export function BoardContainer() {
   const { columns, fetchBoard, moveCardOptimistic } = useBoardStore();
   const { t } = useI18nStore();
   const [mounted, setMounted] = useState(false);
+  const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -66,7 +68,10 @@ export function BoardContainer() {
             {t("board.sort")}
           </button>
           <div className="h-8 w-[1px] bg-stone-200 dark:bg-stone-800 mx-1"></div>
-          <button className="bg-[#4a7c59] text-white px-6 py-2 rounded-lg text-sm font-medium shadow-md shadow-[#4a7c59]/20 hover:shadow-lg transition-all hover:-translate-y-0.5">
+          <button 
+            onClick={() => setIsAddModalOpen(true)}
+            className="bg-[#4a7c59] text-white px-6 py-2 rounded-lg text-sm font-medium shadow-md shadow-[#4a7c59]/20 hover:shadow-lg transition-all hover:-translate-y-0.5"
+          >
             {t("board.createDeal")}
           </button>
         </div>
@@ -90,6 +95,7 @@ export function BoardContainer() {
       </div>
 
       <LeadSlideover />
+      <AddLeadModal isOpen={isAddModalOpen} onClose={() => setIsAddModalOpen(false)} />
     </div>
   );
 }

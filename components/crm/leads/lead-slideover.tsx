@@ -2,12 +2,12 @@
 
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { X, User, DollarSign, Target, FileText, Activity, Send, Plus, Trash2, Loader2 } from "lucide-react";
+import { X, User, DollarSign, Target, FileText, Activity as ActivityIcon, Send, Plus, Trash2, Loader2 } from "lucide-react";
 import { useBoardStore, LeadCard } from "@/store/use-board-store";
 import { useI18nStore } from "@/store/use-i18n-store";
 import { supabase } from "@/lib/db/supabase-client";
 
-interface Activity {
+interface ActivityRecord {
   id: string;
   lead_id: string;
   user_id: string | null;
@@ -29,7 +29,7 @@ export function LeadSlideover() {
 
   // Commentary State
   const [note, setNote] = useState("");
-  const [activities, setActivities] = useState<Activity[]>([]);
+  const [activities, setActivities] = useState<ActivityRecord[]>([]);
   
   // Generation State
   const [isGenerating, setIsGenerating] = useState(false);
@@ -276,7 +276,7 @@ export function LeadSlideover() {
               {/* RIGHT COLUMN - ACTIVITY FEED */}
               <div className="flex-1 flex flex-col p-6 overflow-hidden">
                 <div className="flex items-center gap-2 text-stone-400 text-sm font-bold uppercase tracking-wider mb-6 shrink-0">
-                  <Activity className="w-5 h-5 text-emerald-600 dark:text-emerald-500" />
+                  <ActivityIcon className="w-5 h-5 text-emerald-600 dark:text-emerald-500" />
                   {t("slideover.activityFeed")}
                 </div>
 

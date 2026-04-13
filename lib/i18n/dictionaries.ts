@@ -34,6 +34,13 @@ export const dictionaries = {
       },
       closingProbability: "Вероятность закрытия"
     },
+    modal: {
+      dealTitle: "Название сделки",
+      dealTitlePlaceholder: "Напр. Внедрение CRM",
+      budget: "Бюджет ($)",
+      stage: "Этап",
+      creating: "Создание..."
+    },
     slideover: {
       budget: "Бюджет",
       contact: "Контакт",
@@ -80,6 +87,13 @@ export const dictionaries = {
       },
       closingProbability: "Closing Probability"
     },
+    modal: {
+      dealTitle: "Deal Title",
+      dealTitlePlaceholder: "e.g. CRM Implementation",
+      budget: "Budget ($)",
+      stage: "Stage",
+      creating: "Creating..."
+    },
     slideover: {
       budget: "Budget",
       contact: "Contact",
@@ -125,6 +139,13 @@ export const dictionaries = {
         closingSoon: "Tez orada yopiladi"
       },
       closingProbability: "Yopilish ehtimoli"
+    },
+    modal: {
+      dealTitle: "Bitim nomi",
+      dealTitlePlaceholder: "Masalan. CRM joriy etish",
+      budget: "Budjet ($)",
+      stage: "Bosqich",
+      creating: "Yaratilmoqda..."
     },
     slideover: {
       budget: "Budjet",

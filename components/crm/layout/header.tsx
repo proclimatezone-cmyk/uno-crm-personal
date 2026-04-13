@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { Search, Bell, Settings } from "lucide-react";
 import { useI18nStore } from "@/store/use-i18n-store";
 
@@ -49,10 +50,13 @@ export function Header() {
         <button className="p-2 text-stone-500 hover:bg-stone-100 dark:hover:bg-stone-800 rounded-full transition-colors">
           <Settings className="w-5 h-5" />
         </button>
-        <img 
-          alt="User profile" 
-          className="w-8 h-8 rounded-full border border-stone-200 dark:border-stone-700 object-cover" 
-          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAW9N09bQKDICp9YXlyOxDxEmdEQoKJ_0fz7a3ZLY2FfQcifNeUNOI_8ZcG-mpNod8_RLX_m9XUYv4KuEpQ0WMIDq8zD-fgguR-itcnuwt9DG2Oni_D0mr49zj2hHL9u-gUFEqJy5AH1LVNgNj6Pp2YcwA4-ycGVWaefdq_f-bbiEEihLchLn_PAxfcA1iu9Ezys1Fj6W-lEnRNueZeG73bejWr10XAf35OYfmQXafJG2OsiQ72e8HLA05jjnaRe955ak8lsWZoQ"
+        <Image 
+           alt="User profile"
+           width={32}
+           height={32}
+           unoptimized
+           className="w-8 h-8 rounded-full border border-stone-200 dark:border-stone-700 object-cover" 
+           src="https://lh3.googleusercontent.com/aida-public/AB6AXuBAW9N09bQKDICp9YXlyOxDxEmdEQoKJ_0fz7a3ZLY2FfQcifNeUNOI_8ZcG-mpNod8_RLX_m9XUYv4KuEpQ0WMIDq8zD-fgguR-itcnuwt9DG2Oni_D0mr49zj2hHL9u-gUFEqJy5AH1LVNgNj6Pp2YcwA4-ycGVWaefdq_f-bbiEEihLchLn_PAxfcA1iu9Ezys1Fj6W-lEnRNueZeG73bejWr10XAf35OYfmQXafJG2OsiQ72e8HLA05jjnaRe955ak8lsWZoQ"
         />
       </div>
     </header>

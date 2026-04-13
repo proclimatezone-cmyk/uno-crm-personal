@@ -21,20 +21,22 @@ export const LeadCard = memo(({ card, index }: LeadCardProps) => {
     <Draggable draggableId={card.id} index={index}>
       {(provided, snapshot) => {
         return (
+        <div
+          ref={provided.innerRef}
+          {...provided.draggableProps}
+          {...provided.dragHandleProps}
+          style={{ ...provided.draggableProps.style }}
+        >
         <motion.div
           layout
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.2 }}
-          ref={provided.innerRef}
-          {...(provided.draggableProps as any)}
-          {...provided.dragHandleProps}
           className={`bg-white dark:bg-stone-900 border ${
             snapshot.isDragging 
               ? 'border-emerald-500 shadow-xl z-50' 
               : 'border-transparent hover:border-emerald-500/30 shadow-[0_4px_20px_rgba(46,50,48,0.06)]'
           } transition-colors p-5 rounded-xl group cursor-grab`}
-          style={{ ...provided.draggableProps.style }}
           onClick={() => setSelectedLead(card.id)}
         >
           <div className="flex justify-between items-start mb-3">
@@ -92,6 +94,7 @@ export const LeadCard = memo(({ card, index }: LeadCardProps) => {
             </div>
           )}
         </motion.div>
+        </div>
         );
       }}
     </Draggable>

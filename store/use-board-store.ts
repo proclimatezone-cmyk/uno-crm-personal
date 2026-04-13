@@ -43,6 +43,7 @@ export interface BoardState {
     sourceIndex: number, 
     destinationIndex: number
   ) => Promise<void>;
+  addLead: (lead: Omit<LeadCard, 'id' | 'createdAt' | 'boardPosition'>, stageId: string) => Promise<void>;
 }
 
 export const useBoardStore = create<BoardState>((set, get) => ({
@@ -214,6 +215,50 @@ export const useBoardStore = create<BoardState>((set, get) => ({
         columns: previousColumns, 
         error: 'Ошибка при перемещении карточки. Расстановка возвращена к исходной.' 
       });
+    }
+  },
+
+  addLead: async (leadData, stageId) => {
+    const isPlaceholder = !process.env.NEXT_PUBLIC_SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL.includes('placeholder');
+    
+    if (isPlaceholder) {
+      const newLead: LeadCard = {
+        ...leadData,
+        id: `lead-${Math.random().toString(36).substr(2, 9)}`,
+        createdAt: new Date().toISOString(),
+        boardPosition: 0
+      };
+
+      set((state) => ({
+        columns: state.columns.map(col => 
+          col.id === stageId 
+            ? { ...col, cards: [newLead, ...col.cards].map((c, i) => ({ ...c, boardPosition: i })) }
+            : col
+        )
+      }));
+      return;
+    }
+
+    try {
+      const { error } = await supabase
+        .from('leads')
+        .insert({
+          title: leadData.title,
+          price: leadData.price,
+          stage_id: stageId,
+          board_position: 0,
+          custom_fields: leadData.customFields || {}
+        })
+        .select()
+        .single();
+
+      if (error) throw error;
+
+      // Refresh board to get the new lead with all relations
+      get().fetchBoard();
+    } catch (error) {
+      console.error("Failed to add lead:", error);
+      set({ error: (error as Error).message });
     }
   }
 }));
